@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 //const io = require('socket.io').listen(3000).sockets;
 mongoose.connect('mongodb://127.0.0.1/AngularChat', { useUnifiedTopology: true ,   useNewUrlParser: true  }, (err,db)=>{
     if(err)
@@ -24,6 +23,8 @@ app.use(function (req, res, next) {
 });
 
 
+
+
 let http = require('http');
 
 let server = http.Server(app);
@@ -32,11 +33,13 @@ let io = require('socket.io').listen(server);
 
 const port = process.env.PORT || 3000;
 
-app.get('',function(req,res){
+
+
+// app.get('',function(req,res){
     
-    var collection = mongoose.connection.db.collection(req.body.room);
-    collection.find()
-})
+//     var collection = mongoose.connection.db.collection(req.body.room);
+//     collection.find()
+// })
 
 server.listen(port, () => {
     console.log(`started on port: ${port}`);
@@ -45,13 +48,27 @@ server.listen(port, () => {
 
 //For getting time in 12 Hrs Format
 function formatAMPM(date) {
+    
+    var dd = date.getDate();
+
+var mm = date.getMonth()+1; 
+var yyyy = date.getFullYear();
+if(dd<10) 
+{
+    dd='0'+dd;
+} 
+
+if(mm<10) 
+{
+    mm='0'+mm;
+} 
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
+    var strTime = dd+'/'+mm+'/'+yyyy+' '+hours + ':' + minutes + ' ' + ampm;
     return strTime;
   }
 
