@@ -35,11 +35,6 @@ const port = process.env.PORT || 3000;
 
 
 
-// app.get('',function(req,res){
-    
-//     var collection = mongoose.connection.db.collection(req.body.room);
-//     collection.find()
-// })
 
 server.listen(port, () => {
     console.log(`started on port: ${port}`);
@@ -92,6 +87,8 @@ io.on('connection', (socket) => {
         }
     })
 })
+
+
    
     
     //For Joining the Room
